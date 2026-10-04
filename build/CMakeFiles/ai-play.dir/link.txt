@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/ai-play.dir/link.d "CMakeFiles/ai-play.dir/src/main.cpp.o" "CMakeFiles/ai-play.dir/src/Print.cpp.o" -o ai-play
