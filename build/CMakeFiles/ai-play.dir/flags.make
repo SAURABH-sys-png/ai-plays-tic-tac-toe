@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/realincor/gitrepos/ai-plays-tic-tac-toe/include
+CXX_INCLUDES = -I/home/saurabh/gitrepos/ai-plays-tic-tac-toe/include
 
 CXX_FLAGS = -std=gnu++17
 

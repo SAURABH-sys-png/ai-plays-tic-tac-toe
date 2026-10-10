@@ -1,3 +1,6 @@
+#ifndef COREMATHS_HPP
+#define COREMATHS_HPP
+
 #include <cmath>
 #include <iomanip>
 #include <iostream>
@@ -8,11 +11,10 @@ using namespace std;
 
 using mat = vector<vector<double>>;
 
-
 // ---------------------------------------------------------------------------
 // Shape helpers (your "shape checking" TODO)
 // ---------------------------------------------------------------------------
-static bool isRectangular(const mat &m)
+inline bool isRectangular(const mat &m)
 {
     if (m.empty())
         return true;
@@ -22,13 +24,13 @@ static bool isRectangular(const mat &m)
     return true;
 }
 
-static void requireNonEmpty(const mat &m, const char *fn)
+inline void requireNonEmpty(const mat &m, const char *fn)
 {
     if (m.empty() || m[0].empty() || !isRectangular(m))
         throw invalid_argument(string(fn) + ": matrix is empty or ragged");
 }
 
-static void requireSameShape(const mat &a, const mat &b, const char *fn)
+inline void requireSameShape(const mat &a, const mat &b, const char *fn)
 {
     requireNonEmpty(a, fn);
     requireNonEmpty(b, fn);
@@ -47,7 +49,7 @@ void transpose(const T (&in)[R][C], T (&out)[C][R])
             out[j][i] = in[i][j];
 }
 
-mat transposeMat(const mat &m)
+inline mat transposeMat(const mat &m)
 {
     requireNonEmpty(m, "transposeMat");
     mat out(m[0].size(), vector<double>(m.size()));
@@ -75,7 +77,7 @@ void dot(const D (&a)[M][N], const D (&b)[N][X], D (&out)[M][X])
     }
 }
 
-mat dotMat(const mat &a, const mat &b)
+inline mat dotMat(const mat &a, const mat &b)
 {
     requireNonEmpty(a, "dotMat");
     requireNonEmpty(b, "dotMat");
@@ -92,7 +94,7 @@ mat dotMat(const mat &a, const mat &b)
 // ---------------------------------------------------------------------------
 // Addition
 // ---------------------------------------------------------------------------
-mat addTwo_Matrices(const mat &a, const mat &b)
+inline mat addTwo_Matrices(const mat &a, const mat &b)
 {
     requireSameShape(a, b, "addTwo_Matrices");
     mat ans(a.size(), vector<double>(a[0].size(), 0.0));
@@ -102,7 +104,7 @@ mat addTwo_Matrices(const mat &a, const mat &b)
     return ans;
 }
 
-mat addMatix_withNum(const mat &m, double num)
+inline mat addMatix_withNum(const mat &m, double num)
 {
     requireNonEmpty(m, "addMatix_withNum");
     mat other(m.size(), vector<double>(m[0].size(), num));
@@ -112,7 +114,7 @@ mat addMatix_withNum(const mat &m, double num)
 // ---------------------------------------------------------------------------
 // Scalar multiplication / division
 // ---------------------------------------------------------------------------
-mat scalerToMatrix(double scalar, const mat &m)
+inline mat scalerToMatrix(double scalar, const mat &m)
 {
     requireNonEmpty(m, "scalerToMatrix");
     int rows = m.size();
@@ -124,7 +126,7 @@ mat scalerToMatrix(double scalar, const mat &m)
     return ans;
 }
 
-mat scalerToMatrixdiv(double scalar, const mat &m)
+inline mat scalerToMatrixdiv(double scalar, const mat &m)
 {
     requireNonEmpty(m, "scalerToMatrixdiv");
     if (scalar == 0.0)
@@ -141,7 +143,7 @@ mat scalerToMatrixdiv(double scalar, const mat &m)
 // ---------------------------------------------------------------------------
 // exp / log / sigmoid
 // ---------------------------------------------------------------------------
-mat expMat(const mat &m)
+inline mat expMat(const mat &m)
 {
     requireNonEmpty(m, "expMat");
     mat ans(m.size(), vector<double>(m[0].size(), 0.0));
@@ -151,7 +153,7 @@ mat expMat(const mat &m)
     return ans;
 }
 
-mat logMat(const mat &m)
+inline mat logMat(const mat &m)
 {
     requireNonEmpty(m, "logMat");
     mat ans(m.size(), vector<double>(m[0].size(), 0.0));
@@ -160,7 +162,8 @@ mat logMat(const mat &m)
             ans[i][j] = std::log(m[i][j]);
     return ans;
 }
-mat sigmoid(const mat &m)
+
+inline mat sigmoid(const mat &m)
 {
     mat B = m;
     for (auto &row : B)
@@ -172,7 +175,7 @@ mat sigmoid(const mat &m)
 // ---------------------------------------------------------------------------
 // Print helpers
 // ---------------------------------------------------------------------------
-void printMat(const mat &m, const string &title = "", int precision = 4)
+inline void printMat(const mat &m, const string &title = "", int precision = 4)
 {
     size_t rows = m.size();
     size_t cols = m.empty() ? 0 : m[0].size();
@@ -213,10 +216,13 @@ void printArr(const T (&a)[R][C], const string &title = "")
 
 // ---------------------------------------------------------------------------
 // Tiny test harness
+// (inline variables need C++17; on older standards, move these two counters
+//  into a .cpp file or make them static.)
 // ---------------------------------------------------------------------------
-static int g_pass = 0, g_fail = 0;
+inline int g_pass = 0;
+inline int g_fail = 0;
 
-void check(bool cond, const string &name)
+inline void check(bool cond, const string &name)
 {
     if (cond)
     {
@@ -230,7 +236,7 @@ void check(bool cond, const string &name)
     }
 }
 
-bool approx(double a, double b, double eps = 1e-9)
+inline bool approx(double a, double b, double eps = 1e-9)
 {
     if (std::isnan(a) && std::isnan(b))
         return true;
@@ -239,7 +245,7 @@ bool approx(double a, double b, double eps = 1e-9)
     return std::fabs(a - b) <= eps;
 }
 
-bool approxMat(const mat &a, const mat &b, double eps = 1e-9)
+inline bool approxMat(const mat &a, const mat &b, double eps = 1e-9)
 {
     if (a.size() != b.size())
         return false;
@@ -267,26 +273,5 @@ bool throwsInvalid(F f)
     }
     return false;
 }
-//int main()
-//{
-    //mat sample = {{1.90, 90.18, 13.4}, {8.78, 67.67, 90.89}, {12.0, 13.3, 56.87}};
-    //mat sample2 = {{1.90, 90.18, 13.4}, {8.78, 67.67, 90.89}, {12.0, 13.3, 56.87}};
 
-  //  cout << "== demo ==\n";
-  //  printMat(sample, "sample");
-  //  mat ans = sigmoid(sample);
-  //  printMat(ans, "sigmoid(sample)  (saturates to ~1.0 for big values, see #10)");
-    //mat ans2 = addTwo_Matrices(sample, sample2);
-  //  printMat(ans2, "sample + sample2");
-//
-  //  testTranspose();
-  //  testDot();
- //   testAdd();
-    //testScalarOps();
-    //testExpLog();
-   // testSigmoid();
-
-    //cout << "\n==============================\n";
-    //cout << "Passed: " << g_pass << "   Failed: " << g_fail << "\n";
-  //  return g_fail == 0 ? 0 : 1;
-//}
+#endif // COREMATHS_HPP

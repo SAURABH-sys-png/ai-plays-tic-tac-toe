@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/realincor/gitrepos/ai-plays-tic-tac-toe/src/Print.cpp" "CMakeFiles/ai-play.dir/src/Print.cpp.o" "gcc" "CMakeFiles/ai-play.dir/src/Print.cpp.o.d"
-  "/home/realincor/gitrepos/ai-plays-tic-tac-toe/src/main.cpp" "CMakeFiles/ai-play.dir/src/main.cpp.o" "gcc" "CMakeFiles/ai-play.dir/src/main.cpp.o.d"
+  "/home/saurabh/gitrepos/ai-plays-tic-tac-toe/src/Print.cpp" "CMakeFiles/ai-play.dir/src/Print.cpp.o" "gcc" "CMakeFiles/ai-play.dir/src/Print.cpp.o.d"
+  "/home/saurabh/gitrepos/ai-plays-tic-tac-toe/src/main.cpp" "CMakeFiles/ai-play.dir/src/main.cpp.o" "gcc" "CMakeFiles/ai-play.dir/src/main.cpp.o.d"
   "" "ai-play" "gcc" "CMakeFiles/ai-play.dir/link.d"
   )
 

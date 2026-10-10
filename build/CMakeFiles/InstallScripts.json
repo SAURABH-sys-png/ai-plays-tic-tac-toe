@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/realincor/gitrepos/ai-plays-tic-tac-toe/build/cmake_install.cmake"
+		"/home/saurabh/gitrepos/ai-plays-tic-tac-toe/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

@@ -1,19 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 #include "Print.hpp"
+#include "coremaths.hpp"
 
 int arr[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 enum XO
 {
-    D, // ->0
-    O, // ->1
-    X // 2
+    D = 0, // ->0
+    O = 1, // ->1
+    X  =-1// 
 };
 
 void updatePos(int PC, int i, int j)
 {
-    arr[i][j] = PC;
+    if(PC == 1 || PC == -1){
+    arr[i][j] = PC;}
 }
 
 int check()
@@ -34,6 +35,8 @@ int check()
 
     if (arr[2][0] == arr[1][1] && arr[1][1] == arr[0][2])
         return arr[1][1];
+    return 1;
+
 }
 
 void resest_board(){
@@ -42,6 +45,12 @@ void resest_board(){
             col = 0;
         }
     }
+}
+
+
+class Neuron {
+  mat Matrix;
+  Neuron(mat Matrix)
 }
 
 void loop(){
@@ -77,7 +86,14 @@ void loop(){
     }
     
 }
+
+
+
+// importing and making use of the functions
+
 int main()
 {
+
+    loop();
     return 0;
 }
